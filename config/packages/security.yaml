@@ -12,6 +12,11 @@ security:
             security: false
         main:
             anonymous: true
+            logout:  ~
+            stateless: true
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator
 
             # activate different ways to authenticate
 
