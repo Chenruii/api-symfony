@@ -3,9 +3,9 @@ security:
     providers:
         in_memory: { memory: ~ }
         our_db_provider:
-                  entity:
-                      class: App\Entity\User
-                      property: apiKey
+              entity:
+                   class: App\Entity\User
+                   property: apiKey
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
