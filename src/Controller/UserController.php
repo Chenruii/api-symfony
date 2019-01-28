@@ -13,39 +13,45 @@ class UserController extends AbstractController
 
     public function __construct(UserRepository $userRepository)
     {
-        $this->userRepository =$userRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
-     * @Rest\Get("api/users/{email}")
+     * @Rest\Get("/api/users")
      */
-    public function getOneUser(User $user)
-    {
-    }
-    /**
-     * @Rest\Get("api/users")
-     */
-    public function  getApiUsers()
+    public function getApiUsers()
     {
         $users = $this->userRepository->findAll();
         return $this->json($users);
     }
     /**
-     * @Rest\Get("api/users")
+     * @Rest\Get("/api/users")
      */
-    public function  getAllUsers(User $user)
+    public function getApiUser(User $user)
+    {
+        return $this->json($user);
+    }
+
+    /**
+     *
+     * @Rest\Get("/api/user/{email}")
+     */
+    public function getOneUser(User $user)
+    {
+    }
+
+
+
+    /**
+     * @Rest\Patch("/api/users/{email}")
+     */
+    public function patchApiUser(User $user)
     {
     }
     /**
-     * @Rest\Get("api/users/{email}")
+     * @Rest\Delete("/api/users/{email}")
      */
-    public function  patchApiUser(User $user)
-    {
-    }
-    /**
-     * @Rest\Get("api/users/{email}")
-     */
-    public function  deleteApiUser(User $user)
+    public function deleteApiUser(User $user)
     {
     }
 }

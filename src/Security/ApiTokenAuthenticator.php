@@ -59,7 +59,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
     public function getCredentials(Request $request)
     {
         return [
-            'tocken' => $request ->headers->get('X-AUTH-TOKE'),
+            'tocken' => $request->headers->get('X-AUTH-TOKE'),
             ];
     }
 
@@ -68,7 +68,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
         $apiKey = $credentials['token'];
 
         if (null === $apiKey) {
-            return;
+            return $apiKey;
         }
         // if a user object, checkCredentials() is called
         return $this->em->getRepository(User::class)
