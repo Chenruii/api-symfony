@@ -49,13 +49,20 @@ class UserController extends AbstractFOSRestController
     {
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
-
+        $apikey =$request->get('apiKey');
+        $birthday =$request->get('birthday');
 
         if (null !== $firstname ){
             $user->setFirstname($firstname);
         }
         if (null !== $lastname){
             $user->setLastname($lastname);
+        }
+        if (null !== $apikey){
+            $user->setApiKey($apikey);
+        }
+        if (null !== $birthday){
+            $user->setBirthday($birthday);
         }
 
         $this->em->persist($user);
@@ -66,10 +73,7 @@ class UserController extends AbstractFOSRestController
     /**
      * @Rest\Delete("/api/users/{email}")
      */
-    public function deleteApiUser(User $user)
-    {
-
-    }
+    public function deleteApiUser(User $user){}
 
     /**
      * @Rest\Post("/api/users")
