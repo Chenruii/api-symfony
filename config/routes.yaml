@@ -1,8 +1,8 @@
 #home:
 #    path: /
 #    controller: App\Controller\HomeController::home
-users:
+user:
   type: rest
-  ressource: App\Controller\UsersController
+  resource: App\Controller\UserController
 
 
