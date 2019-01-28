@@ -50,7 +50,8 @@ class UserController extends AbstractFOSRestController
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
         $apikey =$request->get('apiKey');
-        $birthday =$request->get('birthday');
+//        $birthday =$request->get('birthday');
+
 
         if (null !== $firstname ){
             $user->setFirstname($firstname);
@@ -61,9 +62,9 @@ class UserController extends AbstractFOSRestController
         if (null !== $apikey){
             $user->setApiKey($apikey);
         }
-        if (null !== $birthday){
-            $user->setBirthday($birthday);
-        }
+//        if (null !== $birthday){
+//            $user->setBirthday($birthday);
+//        }
 
         $this->em->persist($user);
         $this->em->flush();
@@ -77,7 +78,7 @@ class UserController extends AbstractFOSRestController
 
     /**
      * @Rest\Post("/api/users")
-     * @paramConverter("user",converter="fos_rest.request_body")
+     * @ParamConverter("user",converter="fos_rest.request_body")
      */
     public function postApiUser (User $user)
     {
