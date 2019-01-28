@@ -24,13 +24,7 @@ class UserController extends AbstractController
         $users = $this->userRepository->findAll();
         return $this->json($users);
     }
-    /**
-     * @Rest\Get("/api/users")
-     */
-    public function getApiUser(User $user)
-    {
-        return $this->json($user);
-    }
+
 
     /**
      *
@@ -38,6 +32,7 @@ class UserController extends AbstractController
      */
     public function getOneUser(User $user)
     {
+        return $this->json($user);
     }
 
 
@@ -47,11 +42,13 @@ class UserController extends AbstractController
      */
     public function patchApiUser(User $user)
     {
+        return $this->json($user);
     }
     /**
      * @Rest\Delete("/api/users/{email}")
      */
     public function deleteApiUser(User $user)
     {
+
     }
 }

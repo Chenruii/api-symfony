@@ -43,7 +43,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="simple_array")
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * @ORM\Column(unique=true)
@@ -104,12 +104,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles(): ?string
+    public function getRoles(): array
     {
         return $this->roles;
     }
 
-    public function setRoles(?string $roles): self
+    public function setRoles(?string $roles)
     {
         $this->roles = $roles;
 
