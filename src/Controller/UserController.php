@@ -11,7 +11,7 @@ class UserController extends AbstractController
     /**
      * @Rest\Get("api/users/{email}")
      */
-    public function  getUser(User $user)
+    public function getOneUser(User $user)
     {
     }
     /**
@@ -23,7 +23,7 @@ class UserController extends AbstractController
     /**
      * @Rest\Get("api/users")
      */
-    public function  getApiUser(User $user)
+    public function  getAllUsers(User $user)
     {
     }
     /**
