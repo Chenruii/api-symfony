@@ -4,16 +4,20 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class UserController extends AbstractController
+class UserController extends AbstractFOSRestController
 {
     private $userRepository;
+    private $em;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository,EntityManagerInterface $entityManager)
     {
         $this->userRepository = $userRepository;
+        $this->em = $entityManager;
     }
 
     /**
@@ -49,6 +53,18 @@ class UserController extends AbstractController
      */
     public function deleteApiUser(User $user)
     {
+
+    }
+
+    /**
+     * @Rest\Post("/api/users")
+     * @paramConverter("user",converter="fos_rest.request_body")
+     */
+    public function postApiUser (User $user)
+    {
+        $this->em->persist($user);
+        $this->em->flush();
+        return $this->json($user);
 
     }
 }
