@@ -16,7 +16,7 @@ security:
             stateless: true
             guard:
                 authenticators:
-                    - App\Security\TokenAuthenticator
+                    - App\Security\ApiTokenAuthenticator
 
             # activate different ways to authenticate
 
