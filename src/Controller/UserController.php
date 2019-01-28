@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractFOSRestController
 {
@@ -44,8 +45,22 @@ class UserController extends AbstractFOSRestController
     /**
      * @Rest\Patch("/api/users/{email}")
      */
-    public function patchApiUser(User $user)
+    public function patchApiUser( Request $request,User $user)
     {
+        $firstname = $request->get('firstname');
+        $lastname = $request->get('lastname');
+
+
+        if (null !== $firstname ){
+            $user->setFirstname($firstname);
+        }
+        if (null !== $lastname){
+            $user->setLastname($lastname);
+        }
+
+        $this->em->persist($user);
+        $this->em->flush();
+
         return $this->json($user);
     }
     /**
