@@ -28,7 +28,7 @@ class UserController extends AbstractController
     public function  getApiUsers()
     {
         $users = $this->userRepository->findAll();
-        return $this->view($users);
+        return $this->json($users);
     }
     /**
      * @Rest\Get("api/users")
