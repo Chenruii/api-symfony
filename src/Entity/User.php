@@ -38,7 +38,7 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @Groups("user")
+     * @Groups({"user","light"})
      * @Assert\NotBlank()
      * @ORM\Column(unique=true)
      * @ORM\Column(type="string", length=255, nullable=false)

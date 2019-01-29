@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 class ArticleController extends AbstractFOSRestController
 {
@@ -71,6 +72,7 @@ class ArticleController extends AbstractFOSRestController
     public function deleteApiArticle(Article $article){}
 
     /**
+     * @Groups({"article" ,"light"})
      * @Rest\Post("/api/articles")
      * @ParamConverter("article",converter="fos_rest.request_body")
      */

@@ -38,7 +38,7 @@ class Article
     private $createAt;
 
     /**
-     * @Groups("article")
+     * @Groups("light")
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
      * @ORM\JoinColumn(nullable=true)
      */
