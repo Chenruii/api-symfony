@@ -72,6 +72,8 @@ class User implements UserInterface
     {
         $this->articles = new ArrayCollection();
         $this->roles = array('ROLE USER');
+       // $this->apiKey = is_string('numberBetween(1000, 9000');
+
     }
 
     public function getId(): ?int
