@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
@@ -17,19 +18,19 @@ class Article
     private $id;
 
     /**
-     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $name;
 
     /**
-     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="datetime")
      */
     private $createAt;
