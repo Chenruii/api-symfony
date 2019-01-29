@@ -38,10 +38,8 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @Groups({"user","light"})
-     * @Assert\NotBlank()
-     * @ORM\Column(unique=true)
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"user","userlight"})
+     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      */
     private $email;
 
@@ -64,6 +62,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $apiKey;
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user")
      */

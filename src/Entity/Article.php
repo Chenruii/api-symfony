@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
@@ -34,11 +35,12 @@ class Article
     /**
      * @Groups("article")
      * @ORM\Column(type="datetime")
+     *
      */
     private $createAt;
 
     /**
-     * @Groups("light")
+     * @Groups("userlight")
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
      * @ORM\JoinColumn(nullable=true)
      */

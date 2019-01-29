@@ -72,7 +72,7 @@ class ArticleController extends AbstractFOSRestController
     public function deleteApiArticle(Article $article){}
 
     /**
-     * @Groups({"article" ,"light"})
+     * @Rest\View(serializerGroups={"article"})
      * @Rest\Post("/api/articles")
      * @ParamConverter("article",converter="fos_rest.request_body")
      */
