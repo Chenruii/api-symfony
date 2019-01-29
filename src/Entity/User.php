@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -62,9 +63,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $apiKey;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user")
+     */
+    private $articles;
 
     public function __construct()
     {
+        $this->articles = new ArrayCollection();
         $this->roles = array('ROLE USER');
     }
 
@@ -144,6 +150,16 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
 
     /**
      * Returns the password used to authenticate the user.

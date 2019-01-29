@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Article
 {
     /**
+     * @Groups("article")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -18,24 +20,26 @@ class Article
     private $id;
 
     /**
-     *
+     * @Groups("article")
      * @ORM\Column(type="string", nullable=true)
      */
     private $name;
 
     /**
-     *
+     * @Groups("article")
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     *
+     * @Groups("article")
      * @ORM\Column(type="datetime")
      */
     private $createAt;
 
-    /** * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
+    /**
+     * @Groups("article")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;

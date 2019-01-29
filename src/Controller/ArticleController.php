@@ -21,21 +21,22 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Rest\Get("/api/article/{id}")
-     *
-     */
-    public function getOneArticle(Article $article)
-    {
-        return $this->json($article);
-    }
-
-    /**
+     * @Rest\View(serializerGroups={"article"})
      * @Rest\Get("/api/articles")
      */
     public function getAllArticles()
     {
         $articles = $this->articleRepository->findAll();
         return $this->json($articles);
+    }
+
+    /**
+     * @Rest\Get("/api/article/{id}")
+     *
+     */
+    public function getOneArticle(Article $article)
+    {
+        return $this->json($article);
     }
 
 
@@ -46,8 +47,6 @@ class ArticleController extends AbstractController
     {
         $name = $request->get('name');
         $description = $request->get('description');
-
-
         $createAt = $request->get('createAt');
 
 
@@ -56,11 +55,11 @@ class ArticleController extends AbstractController
             $article->setName($name);
         }
         if (null !== $description ){
-            $article->getDescription($description);
+            $article->setDescription($description);
         }
 
         if (null !== $createAt){
-            $article->getCreateAt( new \DateTime( $createAt));
+            $article->setCreateAt( new \DateTime( $createAt));
         }
         $this->em->persist($article);
         $this->em->flush();
