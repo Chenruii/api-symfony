@@ -41,8 +41,6 @@ class UserController extends AbstractFOSRestController
         return $this->json($user);
     }
 
-
-
     /**
      * @Rest\Patch("/api/users/{email}")
      */
@@ -66,8 +64,6 @@ class UserController extends AbstractFOSRestController
         if (null !== $birthday){
              $user->setBirthday( new \DateTime( $birthday));
         }
-
-
         $this->em->persist($user);
         $this->em->flush();
 
