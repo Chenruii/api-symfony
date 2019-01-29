@@ -22,10 +22,11 @@ class UserController extends AbstractFOSRestController
     }
 
     /**
+     * @Rest\View(serializerGroups={"user"})
      * @Rest\Get("/api/users")
      *
      */
-    public function getApiUsers()
+    public function getAllUsers()
     {
         $users = $this->userRepository->findAll();
         return $this->json($users);

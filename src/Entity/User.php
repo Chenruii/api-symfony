@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
     /**
+     * @Groups("user")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -23,16 +24,19 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Groups("user")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstname;
 
     /**
+     * @Groups("user")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
     /**
+     * @Groups("user")
      * @Assert\NotBlank()
      * @ORM\Column(unique=true)
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -40,16 +44,19 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @Groups("user")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $birthday;
 
     /**
+     * @Groups("user")
      * @ORM\Column(type="simple_array", nullable=true)
      */
     private $roles = [];
 
     /**
+     * @Groups("user")
      * @Assert\NotBlank()
      * @ORM\Column(unique=true)
      * @ORM\Column(type="string", length=255, nullable=true)
