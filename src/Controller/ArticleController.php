@@ -5,11 +5,11 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class ArticleController extends AbstractController
+class ArticleController extends AbstractFOSRestController
 {
     private $articleRepository;
     private $em;
@@ -27,7 +27,7 @@ class ArticleController extends AbstractController
     public function getAllArticles()
     {
         $articles = $this->articleRepository->findAll();
-        return $this->json($articles);
+        return $this->view($articles);
     }
 
     /**
@@ -36,20 +36,18 @@ class ArticleController extends AbstractController
      */
     public function getOneArticle(Article $article)
     {
-        return $this->json($article);
+        return $this->view($article);
     }
 
 
     /**
-     * @Rest\Patch("/api/users/{email}")
+     * @Rest\Patch("/api/articles/{id}")
      */
     public function patchApiArticle( Request $request,Article $article)
     {
         $name = $request->get('name');
         $description = $request->get('description');
         $createAt = $request->get('createAt');
-
-
 
         if (null !== $name ){
             $article->setName($name);
@@ -64,10 +62,10 @@ class ArticleController extends AbstractController
         $this->em->persist($article);
         $this->em->flush();
 
-        return $this->json($article);
+        return $this->view($article);
     }
     /**
-     * @Rest\Delete("/api/articles/{email}")
+     * @Rest\Delete("/api/articles/{id}")
      */
     public function deleteApiArticle(Article $article){}
 
@@ -79,9 +77,8 @@ class ArticleController extends AbstractController
     {
         $this->em->persist($article);
         $this->em->flush();
-        return $this->json($article);
+        return $this->view($article);
 
     }
-
 
 }
