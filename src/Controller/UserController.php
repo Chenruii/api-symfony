@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserController extends AbstractFOSRestController
 {
@@ -72,7 +73,14 @@ class UserController extends AbstractFOSRestController
     /**
      * @Rest\Delete("/api/users/{email}")
      */
-    public function deleteApiUser(User $user){}
+    public function deleteApiUser(User $user)
+    {
+//        $user =$this->getUser();
+//        if (null == $user)
+//        {
+//            throw new HttpException();
+//        }
+    }
 
     /**
      * @Rest\Post("/api/users")
