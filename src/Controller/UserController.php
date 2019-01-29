@@ -76,7 +76,7 @@ class UserController extends AbstractFOSRestController
     public function deleteApiUser(User $user)
     {
 //        $user =$this->getUser();
-//        if (null == $user)
+//        if (null === $user)
 //        {
 //            throw new HttpException();
 //        }
