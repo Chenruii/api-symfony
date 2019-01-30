@@ -35,13 +35,15 @@ class UsersControllerTest extends WebTestCase
             [
                 'HTTP_ACCEPT' => 'application/json',
                 'CONTENT_TYPE' => 'application/json',
+                'HTTP_X-AUTH-TOKEN' => 'aaa'
             ],
-            '{"apiKey": "adqaaa","email": "test@behat.com"}'
+            //'{"apiKey": "adqaaa","email": "test@behat.com"}'
+            '{"apiKey": "teasting","email": "teasdaat@baehat.com"}'
         );
         $response = $client->getResponse();
         $content = $response->getContent();
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(500, $response->getStatusCode());
         $this->assertJson($content);
     }
 
