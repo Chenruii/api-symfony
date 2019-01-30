@@ -7,9 +7,10 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserController extends AbstractFOSRestController
 {
@@ -25,6 +26,8 @@ class UserController extends AbstractFOSRestController
     /**
      * @Rest\Get("/api/users")
      * @Rest\View(serializerGroups={"user"})
+     *
+
      */
     public function getAllUsers()
     {
@@ -61,7 +64,7 @@ class UserController extends AbstractFOSRestController
         }
         if (null !== $apikey){
             $user->setApiKey($apikey);
-        }
+       }
         if (null !== $birthday){
              $user->setBirthday( new \DateTime( $birthday));
         }

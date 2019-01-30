@@ -60,6 +60,7 @@ class User implements UserInterface
      * @Assert\NotBlank()
      * @ORM\Column(unique=true)
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $apiKey;
 
