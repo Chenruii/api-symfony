@@ -43,7 +43,7 @@ class ArticleController extends AbstractFOSRestController
 
 
     /**
-     * @Rest\Patch("/api/articles/{id}")
+     * @Rest\Patch("/api/article/{id}")
      */
     public function patchApiArticle( Request $request,Article $article)
     {
@@ -57,7 +57,7 @@ class ArticleController extends AbstractFOSRestController
         if (null !== $description ){
             $article->setDescription($description);
         }
-
+        {}
         if (null !== $createAt){
             $article->setCreateAt( new \DateTime( $createAt));
         }
@@ -67,7 +67,7 @@ class ArticleController extends AbstractFOSRestController
         return $this->view($article);
     }
     /**
-     * @Rest\Delete("/api/articles/{id}")
+     * @Rest\Delete("/api/article/{id}")
      */
     public function deleteApiArticle(Article $article){}
 
