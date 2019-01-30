@@ -70,6 +70,21 @@ class UserController extends AbstractFOSRestController
              $user->setBirthday( new \DateTime( $birthday));
         }
 
+        $validationErrors =$validator->validate($user);
+        if ($validationErrors->count() > 0){
+            foreach ($validationErrors as $constraintViolation ){
+                // Returns the violation message. (Ex. This value should not be blank.) $message = $constraintViolation ->getMessage(); // Returns the property path from the root element to the violation. (Ex. lastname
+                $message = $constraintViolation ->getMessage();
+                // Returns the property path from the root element to the violation. (Ex. lastname)
+                $propertyPath = $constraintViolation ->getPropertyPath();
+                $errors[] = ['message' => $message, 'propertyPath' => $propertyPath];
+            }
+        }
+        if (!empty($errors)){
+            // Throw a 400 Bad Request with all errors messages (Not readable, you can do better)
+            throw new BadRequestHttpException(\json_encode( $errors));
+        }
+
 
         $this->em->persist($user);
         $this->em->flush();
