@@ -146,7 +146,7 @@ class User implements UserInterface
         return $this->apiKey;
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(?string $apiKey): self
     {
         $this->apiKey = $apiKey;
 
