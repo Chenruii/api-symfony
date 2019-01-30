@@ -31,7 +31,7 @@ class UsersControllerTest extends WebTestCase
     public function testPostUsers()
     {
         $client = static::createClient();
-        $client->request('GET', '/api/users', [], [],
+        $client->request('POST', '/api/users', [], [],
             [
                 'HTTP_ACCEPT' => 'application/json',
                 'CONTENT_TYPE' => 'application/json',
