@@ -37,7 +37,7 @@ class ArticlesControllerTest extends WebTestCase
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_X-AUTH-TOKEN' => 'aaa'
             ],
-            '{"name": "lorem","description": "blablabla"}'
+            '{"name": "lorem","description": "blablabla","createAt":"2019-01-01"}'
 
         );
         $response = $client->getResponse();
@@ -46,6 +46,4 @@ class ArticlesControllerTest extends WebTestCase
         $this->assertEquals(500, $response->getStatusCode());
         $this->assertJson($content);
     }
-
-
 }

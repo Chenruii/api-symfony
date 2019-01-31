@@ -46,6 +46,23 @@ class UsersControllerTest extends WebTestCase
         $this->assertEquals(500, $response->getStatusCode());
         $this->assertJson($content);
     }
+    public function testPatchUsers()
+    {
+        $client = static::createClient();
+        $client->request('PATCH', '/api/users/{email}', [], [],
+            [
+                'HTTP_ACCEPT' => 'application/json',
+                'CONTENT_TYPE' => 'application/json',
+                'HTTP_X-AUTH-TOKEN' => 'aaa'
+            ],
+            '{"firstname": "llal","lastname": "jkjdkf","apiKey": "teasting","birthday": "2019-01-01"}'
+        );
+        $response = $client->getResponse();
+        $content = $response->getContent();
+
+        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertJson($content);
+    }
 
 
 }
