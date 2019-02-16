@@ -53,42 +53,59 @@ class UserController extends AbstractFOSRestController
     {
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
-        $apikey =$request->get('apiKey');
-        $birthday =$request->get('birthday');
+        $password = $request->get('password');
+        $apiKey = $request->get('apiKey');
+        $apiCountry = $request->get('cuntry');
+        $apiAdress = $request->get('adress');
+        $apiMail = $request->get('email');
+        $apiSubscription = $request->get('subscription');
 
-
-        if (null !== $firstname ){
+        if ($apiSubscription !== null){
+            $objsub = $subscription->find($apiSubscription);
+            $user->setSubscription($objsub);
+        }
+        if ($firstname !== null){
             $user->setFirstname($firstname);
         }
-        if (null !== $lastname){
+        if ($lastname !== null){
             $user->setLastname($lastname);
         }
-        if (null !== $apikey){
-            $user->setApiKey($apikey);
-       }
-        if (null !== $birthday){
-             $user->setBirthday( new \DateTime( $birthday));
+        if ($apiCountry !== null){
+            $user->setCountry($apiCountry);
+        }
+        if ($apiMail !== null){
+            $user->setEmail($apiMail);
+        }
+//        if ($apiBirthday !== null){
+//            $user->setBirthday($apiBirthday);
+//        }
+        if ($apiAdress !== null){
+            $user->setAddress($apiAdress);
+        }
+        if ($password !== null){
+            $user->setPassword($password);
+        }
+        if ($apiKey !== null){
+            $user->setApiKey($apiKey);
         }
 
-        $validationErrors =$validator->validate($user);
-        if ($validationErrors->count() > 0){
-            foreach ($validationErrors as $constraintViolation ){
-                // Returns the violation message. (Ex. This value should not be blank.) $message = $constraintViolation ->getMessage(); // Returns the property path from the root element to the violation. (Ex. lastname
-                $message = $constraintViolation ->getMessage();
-                // Returns the property path from the root element to the violation. (Ex. lastname)
-                $propertyPath = $constraintViolation ->getPropertyPath();
-                $errors[] = ['message' => $message, 'propertyPath' => $propertyPath];
-            }
-        }
-        if (!empty($errors)){
-            // Throw a 400 Bad Request with all errors messages (Not readable, you can do better)
-            throw new BadRequestHttpException(\json_encode( $errors));
-        }
-
+//        $validationErrors =$validator->validate($user);
+//        if ($validationErrors->count() > 0){
+//            foreach ($validationErrors as $constraintViolation ){
+//                // Returns the violation message. (Ex. This value should not be blank.) $message = $constraintViolation ->getMessage(); // Returns the property path from the root element to the violation. (Ex. lastname
+//                $message = $constraintViolation ->getMessage();
+//                // Returns the property path from the root element to the violation. (Ex. lastname)
+//                $propertyPath = $constraintViolation ->getPropertyPath();
+//                $errors[] = ['message' => $message, 'propertyPath' => $propertyPath];
+//            }
+//        }
+//        if (!empty($errors)){
+//            // Throw a 400 Bad Request with all errors messages (Not readable, you can do better)
+//            throw new BadRequestHttpException(\json_encode( $errors));
 
         $this->em->persist($user);
         $this->em->flush();
-
+        echo'user modifier email inchangé!';
         return $this->json($user);
     }
     /**
