@@ -35,7 +35,7 @@ class SubscriptionController extends AbstractController
      * @Rest\Get("/api/subscriptions")
      * @Rest\View(serializerGroups = {"subscription"})
      */
-    public function getApiAllSubscription(){
+    public function getAllSubscription(){
 
         $subscriptions = $this->subscriptionRepository->findAll();
         return $this->json($subscriptions);
@@ -45,7 +45,7 @@ class SubscriptionController extends AbstractController
      * @Rest\View(serializerGroups = {"subscription"})
      * @Rest\Get("/api/subscriptions/{id}")
      */
-    public function getApiSubscription(Subscription $subscription){
+    public function getSubscription(Subscription $subscription){
         return $this->json($subscription);
     }
 
@@ -54,7 +54,7 @@ class SubscriptionController extends AbstractController
      * @ParamConverter("subscription",converter="fos_rest.request_body")
      * @Rest\View(serializerGroups={"subscription"})
      */
-    public function postApiSubscription (Request $request,Subscription $subscription)
+    public function postSubscription (Request $request,Subscription $subscription)
     {
 
         $this->em->persist($subscription);
@@ -65,7 +65,7 @@ class SubscriptionController extends AbstractController
      * @Rest\Patch("/api/admin/subscriptions/{id}")
      * @Rest\View(serializerGroups={"subscription"})
      */
-    public function patchApiSubcription(Request $request,Subscription $subscription){
+    public function patchSubcription(Request $request,Subscription $subscription){
         $ApiName = $request->get('name');
         $ApiSlogan = $request->get('slogan');
         $ApiUrl = $request->get('url');

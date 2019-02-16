@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Card;
+use App\Entity\User;
+use App\Entity\Subscription;
 use App\Repository\CardRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -23,13 +26,26 @@ class CardController extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\View(serializerGroups={"card"})
+     * @Rest\View(serializerGroups={"card","user","subscription"}})
      * @Rest\Get("/api/cards")
      */
     public function getAllCards()
     {
-        $cards = $this->cardRepository->findAll();
-        return $this->view($cards);
+        $card = $this->cardRepository->findAll();
+        $finalArray = array();
+        foreach ($card as $key => &$value) {
+            $finalArray[$key] = array(
+                'id' => $value->getId(),
+                'name' => $value->getName(),
+                'creditCardType' => $value->getCreditCardType(),
+                'creditCardNumber' => $value->getCreditCardNumber(),
+                'currencyCode' => $value->getCurrencyCode(),
+                'value' => $value->getValue(),
+                'email' => $value->getUser()->getEmail(),
+                'firstname' => $value->getUser()->getFirstname(),
+            );
+        }
+        return $this->json($finalArray);
     }
 
     /**
@@ -41,47 +57,58 @@ class CardController extends AbstractFOSRestController
         return $this->view($card);
     }
 
+    /*
+     * @Rest\View(serializerGroups={"card"})
+     * @ParamConverter("card",converter="fos_rest.request_body")
+     */
+    public function postCard (Card $card,Request $request,UserRepository $user)
+    {
+        $this->em->persist($card);
+        $this->em->flush();
+        die('carte ajouté');
+        return $this->json($card);
+
+    }
 
     /**
-     * @Rest\Patch("/api/card/{id}")
+     * @Rest\Patch("/api/card/{creditCardNumber}")
      */
-    public function patchApiCard(Request $request, Card $card)
+    public function patchCard(Request $request, Card $card,UserRepository $user)
     {
         $name = $request->get('name');
-        $description = $request->get('description');
-        $createAt = $request->get('createAt');
+        $credit_card_type = $request->get('credit_card_type');
+        $credit_card_number = $request->get('credit_card_number');
+        $currency_code = $request->get('currency_code');
+        $value = $request->get('value');
+//        $user = $request->get('user');
+//
+//         if ($user !== null){
+//            $objsub = $user->find($user);
+//            $card->setUser($objsub);
+//        }
 
-        if (null !== $name ){
+        if ($name !== null){
             $card->setName($name);
         }
-        if (null !== $description ){
-            $card->setDescription($description);
+        if ($currency_code !== null){
+            $card->setCurrencyCode($currency_code);
         }
-        {}
-        if (null !== $createAt){
-            $card->setCreateAt( new \DateTime( $createAt));
+        if ($credit_card_type !== null){
+            $card->setCreditCardType($credit_card_type);
+        }
+        if ($credit_card_number !== null){
+            $card->setCreditCardNumber($credit_card_number);
+        }
+        if ($value !== null){
+            $card->setValue($value);
         }
         $this->em->persist($card);
         $this->em->flush();
-
-        return $this->view($card);
+        return $this->json($card);
     }
     /**
      * @Rest\Delete("/api/card/{id}")
      */
-    public function deleteApiCard(Card $card){}
-
-    /**
-     * @Rest\View(serializerGroups={"card"})
-     * @Rest\Post("/api/cards")
-     * @ParamConverter("card",converter="fos_rest.request_body")
-     */
-    public function postApiCard (Card $card)
-    {
-        $this->em->persist($card);
-        $this->em->flush();
-        return $this->view($card);
-
-    }
+    public function deleteCard(Card $card){}
 
 }

@@ -113,7 +113,7 @@ class UserController extends AbstractFOSRestController
     /**
      * @Rest\Delete("/api/users/{email}")
      */
-    public function deleteApiUser(User $user)
+    public function deleteUser(User $user)
     {
 //        $user =$this->getUser();
 //        if (null === $user)
@@ -126,7 +126,7 @@ class UserController extends AbstractFOSRestController
      * @Rest\Post("/api/users")
      * @ParamConverter("user",converter="fos_rest.request_body")
      */
-    public function postApiUser (User $user, ConstraintViolationListInterface $validationErrors)
+    public function postUser (User $user, ConstraintViolationListInterface $validationErrors)
     {
         $errors = array();
         if ($validationErrors->count() > 0){
