@@ -55,15 +55,17 @@ class UserController extends AbstractFOSRestController
         $lastname = $request->get('lastname');
         $password = $request->get('password');
         $apiKey = $request->get('apiKey');
+        $apiCreateAt = $request->get('createAt');
         $apiCountry = $request->get('cuntry');
         $apiAdress = $request->get('adress');
         $apiMail = $request->get('email');
-        $apiSubscription = $request->get('subscription');
 
-        if ($apiSubscription !== null){
-            $objsub = $subscription->find($apiSubscription);
-            $user->setSubscription($objsub);
-        }
+//        $apiSubscription = $request->get('subscription');
+//
+//        if ($apiSubscription !== null){
+//            $subscription = $subscription->find($apiSubscription);
+//            $user->setSubscription($subscription);
+//        }
         if ($firstname !== null){
             $user->setFirstname($firstname);
         }
@@ -76,9 +78,9 @@ class UserController extends AbstractFOSRestController
         if ($apiMail !== null){
             $user->setEmail($apiMail);
         }
-//        if ($apiBirthday !== null){
-//            $user->setBirthday($apiBirthday);
-//        }
+        if ($apiCreateAt !== null){
+            $user->setCreatedAt($apiCreateAt);
+        }
         if ($apiAdress !== null){
             $user->setAddress($apiAdress);
         }

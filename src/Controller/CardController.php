@@ -26,7 +26,7 @@ class CardController extends AbstractFOSRestController
      * @Rest\View(serializerGroups={"card"})
      * @Rest\Get("/api/cards")
      */
-    public function getAllcArds()
+    public function getAllCards()
     {
         $cards = $this->cardRepository->findAll();
         return $this->view($cards);
@@ -36,7 +36,7 @@ class CardController extends AbstractFOSRestController
      * @Rest\Get("/api/card/{id}")
      *
      */
-    public function getOnecCard(Card $card)
+    public function getOneCard(Card $card)
     {
         return $this->view($card);
     }
@@ -45,7 +45,7 @@ class CardController extends AbstractFOSRestController
     /**
      * @Rest\Patch("/api/card/{id}")
      */
-    public function patchApicCard(Request $request, Card $card)
+    public function patchApiCard(Request $request, Card $card)
     {
         $name = $request->get('name');
         $description = $request->get('description');
