@@ -74,6 +74,11 @@ class User implements UserInterface
      */
     private $country;
 
+    /*
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="user")
@@ -194,26 +199,16 @@ class User implements UserInterface
     }
 
 
-    /**
-     * @return Collection|Card[]
-     */
-    public function getCards(): Collection
+    public function getPassword(): ?string
     {
-        return $this->Cards;
+        return $this->password;
     }
 
-
-    /**
-     * Returns the password used to authenticate the user.
-     *
-     * This should be the encoded password. On authentication, a plain-text
-     * password will be salted, encoded, and then compared to this value.
-     *
-     * @return string The password
-     */
-    public function getPassword()
+    public function setPassword(string $password): self
     {
+        $this->password = $password;
 
+        return $this;
     }
 
     /**
@@ -260,4 +255,37 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+    /**
+     * @return Collection|Card[]
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards[] = $card;
+            $card->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        if ($this->cards->contains($card)) {
+            $this->cards->removeElement($card);
+            // set the owning side to null (unless already changed)
+            if ($card->getUser() === $this) {
+                $card->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
