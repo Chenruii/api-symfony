@@ -45,9 +45,9 @@ class User implements UserInterface
 
     /**
      * @Groups("user")
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=false)
      */
-    private $birthday;
+    private $createdAt;
 
     /**
      * @Groups("user")
@@ -65,13 +65,24 @@ class User implements UserInterface
     private $apiKey;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $articles;
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $country;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="user")
+     */
+    private $cards;
 
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        $this->cards = new ArrayCollection();
         $this->roles = array('ROLE USER');
        // $this->apiKey = is_string('numberBetween(1000, 9000');
     }
@@ -117,14 +128,38 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBirthday(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->birthday;
+        return $this->createdAt;
     }
 
-    public function setBirthday(\DateTimeInterface $birthday): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->birthday = $birthday;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }
@@ -155,11 +190,11 @@ class User implements UserInterface
 
 
     /**
-     * @return Collection|Article[]
+     * @return Collection|Card[]
      */
-    public function getArticles(): Collection
+    public function getCards(): Collection
     {
-        return $this->articles;
+        return $this->Cards;
     }
 
 
