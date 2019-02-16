@@ -80,6 +80,11 @@ class User implements UserInterface
      */
     private $cards;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subscription", inversedBy="user_sub")
+     */
+    private $subscription;
+
     public function __construct()
     {
         $this->cards = new ArrayCollection();
@@ -242,5 +247,17 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): self
+    {
+        $this->subscription = $subscription;
+
+        return $this;
     }
 }
