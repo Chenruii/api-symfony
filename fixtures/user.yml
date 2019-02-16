@@ -1,7 +1,18 @@
 App\Entity\User:
-  user_{1..10}:
-    firstname: <firstName()>
-    lastname: <lastName()>
-    email: <email()>
-    birthday: <dateTimeBetween('-100 years', '-10 years')>
-    apiKey: <numberBetween(1000, 9000)>
+  user_{1}:
+    firstname: admin
+    lastname: test
+    email: admin@test.com
+    address: 1 rue de test
+    country: paris
+    createAt: 2019-02-17 16:00:00
+    apiKey: 1000
+    user_{2..10}:
+        firstname: <firstName()>
+        lastname: <lastName()>
+        email: <email()>
+        address: <address()>
+        country: <country()>
+        subscription: '@subscription_*'
+        createAt: <dateTimeBetween('-10 years', '-5 years')>
+        apiKey: <numberBetween(1001, 9000)>
