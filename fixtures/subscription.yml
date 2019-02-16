@@ -3,4 +3,4 @@ App\Entity\Subscription:
       name: <text(25)>
       slogan: <text(25)>
       url: <url()>
-      user: '@user_*'
+      user: '@user*'

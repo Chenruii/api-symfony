@@ -36,11 +36,11 @@ class Subscription
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="subscription")
      */
-    private $user_sub;
+    private $user;
 
     public function __construct()
     {
-        $this->user_sub = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -87,28 +87,28 @@ class Subscription
     /**
      * @return Collection|User[]
      */
-    public function getUserSub(): Collection
+    public function getUser(): Collection
     {
-        return $this->user_sub;
+        return $this->user;
     }
 
-    public function addUserSub(User $userSub): self
+    public function addUser(User $user): self
     {
-        if (!$this->user_sub->contains($userSub)) {
-            $this->user_sub[] = $userSub;
-            $userSub->setSubscription($this);
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->setSubscription($this);
         }
 
         return $this;
     }
 
-    public function removeUserSub(User $userSub): self
+    public function removeUserSub(User $user): self
     {
-        if ($this->user_sub->contains($userSub)) {
-            $this->user_sub->removeElement($userSub);
+        if ($this->user->contains($user)) {
+            $this->user->removeElement($user);
             // set the owning side to null (unless already changed)
-            if ($userSub->getSubscription() === $this) {
-                $userSub->setSubscription(null);
+            if ($user->getSubscription() === $this) {
+                $user->setSubscription(null);
             }
         }
 

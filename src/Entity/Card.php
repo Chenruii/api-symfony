@@ -56,7 +56,23 @@ class Card
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cards")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $user;
+    private $users;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param mixed $user_sub
+     */
+    public function setUser($users)
+    {
+        $this->user = $users;
+    }
 
     public function getId(): ?int
     {
@@ -123,17 +139,6 @@ class Card
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     public function getCards(): ?User
     {

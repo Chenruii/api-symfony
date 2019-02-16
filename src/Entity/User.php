@@ -92,6 +92,7 @@ class User implements UserInterface
 
     public function __construct()
     {
+        $this->subscriptions = new ArrayCollection();
         $this->cards = new ArrayCollection();
         $this->roles = array('ROLE USER');
        // $this->apiKey = is_string('numberBetween(1000, 9000');
